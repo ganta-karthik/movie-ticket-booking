@@ -1,0 +1,46 @@
+.movies-list {
+    padding: 20px;
+    min-height: 100vh;
+    padding-top: 14vh;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: #f3f3f3;
+    border-radius: 4px;
+    outline: none;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+
+p {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+
+.image {
+    height: 260px;
+    border-radius: 4px;
+}
+@media screen and (max-width:768px) {
+    .image{
+        height: 160px;
+    }
+}

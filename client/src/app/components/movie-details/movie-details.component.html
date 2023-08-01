@@ -1,0 +1,146 @@
+<div class="bg-dark text-light" style="min-height: 100vh;">
+    <div *ngIf="isLoading">
+        <app-loader-spinner></app-loader-spinner>
+    </div>
+    <div class="movie-details container" *ngIf="!isLoading">
+        <div class="image-container">
+            <img src="{{ movieDetails.image_url }}" alt="Movie Poster">
+        </div>
+        <div class="details-container text-light">
+            <h1>{{ movieDetails.title }}</h1>
+            <p><strong style="font-size: 18px;">Genre:</strong> {{ movieDetails.genre }}</p>
+            <p><strong style="font-size: 18px;">Duration:</strong> {{ movieDetails.duration }} minutes</p>
+            <p><strong style="font-size: 18px;">Release Date:</strong> {{ movieDetails.release_date | date }}</p>            
+            <p><strong style="font-size: 18px;">Ticket Price:</strong> 100 /Rs</p> 
+            <p><strong style="font-size: 18px;">Description:</strong> {{ movieDetails.description }}</p>
+            <!-- <p>Cast: {{ movieDetails.cast}}</p>
+            <p>Language: {{ movieDetails.language }}</p>
+            <p>Rating: {{ movieDetails.rating }}</p> -->
+            
+            <div class="d-flex">
+                <button class="btn btn-primary mr-2" style="padding: 10px 30px;" (click)="onShowTheatres()">Show
+                    Theatres</button>
+                <button class="btn btn-secondary" style="padding: 10px 30px;" routerLink="/movies">
+                    Go Back</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="availableTheatres.length !== 0" class="ml-4 mr-4 mt-4 bg-dark">
+        <h1>Available Theatres</h1>
+        <div class="row">
+            <div class="col-12 col-md-3 col-sm-6" *ngFor="let theatre of availableTheatres">
+                <div class="card text-light p-4 d-flex flex-column justify-content-between mb-4"
+                    style="height: 400px; background-color: rgb(26, 26, 26);">
+                    <img [src]="theatre.image_url" class="mb-2" alt="Theater" style="height: 160px; border-radius: 10px;">
+                    <h5 class="text-secondary"><strong class="text-light">Theatre: </strong> {{theatre.name}}</h5>
+                    <p class="text-secondary"><strong class="text-light">City: </strong> {{theatre.city}}</p>
+                    <p class="text-secondary"><strong class="text-light">State: </strong> {{theatre.state}}</p>
+                    <p class="text-secondary"><strong class="text-light">Total Seats: </strong> {{theatre.capacity}}</p>
+                    <button class="btn btn-primary w-100" (click)="openModal(theatre._id)">Book
+                        Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">Select Seats and Fill Details</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Seat selection and details form -->
+            <!-- ... -->
+            <!-- Seat selection grid -->
+            <div class="seat-grid">
+                <div class="row d-flex" *ngFor="let row of rows">
+                    <button class="btn seat d-flex" *ngFor="let seat of row.seats" [ngClass]="{
+                  'selected': selectedSeats.includes(seat),
+                  'green-bg': selectedSeats.includes(seat),
+                  'bg-secondary': reservedSeats.includes(seat),
+                  'disabled': reservedSeats.includes(seat)
+                }" (click)="selectSeat(seat)">
+                        {{ seat }}
+                    </button>
+                </div>
+            </div>
+            <!-- Selected seats display -->
+            <div class="selected-seats">
+                <p>Selected Seats: {{ selectedSeats.join(', ') }}</p>
+                <p>Total Price: {{totalPrice}} RS</p>
+            </div>
+
+            <div class="d-flex flex-column">
+                <label for="payment" class="mt-2 mb-2">Payment Method</label>
+                <select name="method" id="payment" class="input-field form-control" [(ngModel)]="selectedMethod">
+                    <option value="" selected disabled>Select Payment Method</option>
+                    <option value="creditCard">Credit Card</option>
+                    <option value="debitCard">Debit Card</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+            <button type="button" class="btn btn-primary" (click)="confirmBooking()">Confirm Booking</button>
+        </div>
+    </ng-template>
+
+    <!-- Payment Modal -->
+    <ng-template #payment let-modal *ngIf="selectedMethod === 'creditCard'">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Payment Details</h5>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Payment content goes here -->
+                    <p>Please enter your credit card details:</p>
+                    <!-- Credit card input fields -->
+                    <input type="text" placeholder="Card Number" [(ngModel)]="cardNumber" class="form-control mb-2">
+                    <input type="text" placeholder="Expiration Date" [(ngModel)]="expirationDate"
+                        class="form-control mb-2">
+                    <input type="text" placeholder="CVV" [(ngModel)]="cvv" class="form-control mb-2">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="onPayment()" routerLink="/"
+                        [disabled]="!isPaymentFormValid()">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #payment let-modal *ngIf="selectedMethod === 'debitCard'">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Payment Details</h5>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Payment content goes here -->
+                    <p>Please enter your debit card details:</p>
+                    <!-- Debit card input fields -->
+                    <input type="text" placeholder="Card Number" [(ngModel)]="cardNumber" class="form-control mb-2">
+                    <input type="text" placeholder="Expiration Date" [(ngModel)]="expirationDate"
+                        class="form-control mb-2">
+                    <input type="text" placeholder="CVV" [(ngModel)]="cvv" class="form-control mb-2">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="onPayment()" routerLink="/"
+                        [disabled]="!isPaymentFormValid()">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+</div>

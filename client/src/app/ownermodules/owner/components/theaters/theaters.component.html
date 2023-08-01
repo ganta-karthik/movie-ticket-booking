@@ -1,0 +1,18 @@
+<div *ngIf="isLoading" class="bg-dark">
+    <app-loader-spinner></app-loader-spinner>
+</div>
+ <ul class="theaters-container text-light bg-dark p-4" >
+     <h1 style="margin-top: 10vh; margin-bottom: 2vh;">Theater</h1>
+    <li *ngFor="let theater of theaters" class="pb-4">
+      <div class="mb-4 bg-secondary p-4">
+        <div class="card-body">
+          <h5 class="card-text">{{ theater.name }}</h5>
+          <p class="card-text"><strong>Location:</strong> {{ theater.city }}</p>
+          <p class="card-text"><strong>State:</strong> {{ theater.state }}</p>
+          <p class="card-text"><strong>Seats:</strong> {{ theater.capacity }}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+   

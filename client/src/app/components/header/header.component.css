@@ -1,0 +1,18 @@
+ 
+.navbar{
+    min-height: 10vh;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    padding: 0 20px;
+    position: fixed;
+   width: 100%;
+}
+@media screen and (max-width:768px) {
+    .navbar{
+        background-color: white;
+        padding: 12px;
+    }
+}
+
+.dropdown-item{
+    cursor: pointer;
+}

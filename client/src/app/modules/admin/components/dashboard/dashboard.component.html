@@ -1,0 +1,45 @@
+<div *ngIf="isLoading">
+    <app-loader-spinner></app-loader-spinner>
+</div>
+<div class="dashboard-container bg-dark text-light" style="padding: 14vh 20px " *ngIf="!isLoading">
+    <div class="row">
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card bg-secondary text-light">
+                <div class="card-body">
+                    <h5 class="card-title">Bookings</h5>
+                    <p class="card-text">{{ bookings.length }}</p>
+                    <button class="btn btn-primary" routerLink="/admin/bookings">View Bookings</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card bg-secondary text-light">
+                <div class="card-body">
+                    <h5 class="card-title">Theatres</h5>
+                    <p class="card-text">{{ theatres.length }}</p>
+                    <button class="btn btn-primary" routerLink="/admin/theaters">View Theatres</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card bg-secondary text-light">
+                <div class="card-body">
+                    <h5 class="card-title">Users</h5>
+                    <p class="card-text">{{ users.length }}</p>
+                    <button class="btn btn-primary" routerLink="/admin/users">View Users</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card bg-secondary text-light">
+                <div class="card-body">
+                    <h5 class="card-title">Add New Film or Theater</h5>
+                    <button class="btn btn-primary" routerLink="/admin/add-film-or-theater">Click Here to Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

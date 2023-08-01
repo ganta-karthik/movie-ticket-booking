@@ -1,0 +1,157 @@
+/* Main Styles */
+main {
+  padding: 20px;
+  padding-top: 14vh;
+}
+
+/* Hero Section */
+.hero {
+  background-color: #f2f2f2;
+  padding: 40px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.hero .btn {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.hero .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Features Section */
+.features {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+
+.features .feature {
+  flex-basis: 30%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.features .feature h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.features .feature p {
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Call-to-Action Section */
+.cta {
+  background-color: #007bff;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta h2 {
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.cta .btn {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: #fff;
+  color: #007bff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.cta .btn:hover {
+  background-color: #f2f2f2;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+footer p {
+  font-size: 14px;
+  color: #fff;
+  margin: 0;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 20px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .features {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .features .feature {
+    flex-basis: 45%;
+    margin-bottom: 20px;
+  }
+
+  .cta-content {
+    padding: 20px;
+  }
+
+  .cta h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  footer p {
+    font-size: 12px;
+  }
+}

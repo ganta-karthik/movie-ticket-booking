@@ -1,0 +1,5 @@
+.theaters-container{
+    list-style-type: none;
+    min-height: 100vh;
+    padding: 20px;
+}

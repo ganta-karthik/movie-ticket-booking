@@ -1,0 +1,51 @@
+<div *ngIf="isLoading" class="bg-dark" style="min-height: 100vh;">
+  <app-loader-spinner></app-loader-spinner>
+</div>
+<ul class="bookings-container p-4 bg-dark pt-4 text-light" *ngIf="!isLoading" style="min-height: 100vh; list-style-type: none;">
+  <h1 style="margin-top: 10vh;">Bookings</h1>
+
+  <li *ngFor="let booking of bookings" class="bg-secondary text-light mb-4 p-4" style="width: 100%;">
+    <div>
+      <strong>Booking ID:</strong> {{ booking._id }}
+    </div>
+    <div>
+      <strong>Movie Name:</strong> {{ booking.movie_id.title }}
+    </div>
+    <div>
+      <strong>Theatre:</strong> {{ booking.theater_id.name }}
+    </div>
+    <div>
+      <strong>Release Date:</strong> {{ booking.movie_id.release_date | date }}
+    </div>
+    <div>
+      <strong>Duration:</strong> {{ booking.movie_id.duration }} minutes
+    </div>
+    <div>
+      <strong>Total Ticket Price:</strong> {{ booking.total_price }}
+    </div>
+    <div>
+      <strong>Booking Date:</strong> {{ booking.booking_date | date }}
+    </div>
+    <div>
+      <strong>Location:</strong> {{ booking.theater_id.city}}
+    </div>
+    <div>
+      <strong>Seat Numbers:</strong>
+      <ul>
+        <li *ngFor="let seat of booking.seat_numbers">{{ seat }}</li>
+      </ul>
+    </div>
+    <div *ngIf="booking.paymentMethod !== ''">
+      <strong>Payment Method:</strong> {{ booking.payment_method }}
+    </div>
+
+
+    <div *ngIf="booking.paymentMethod !== ''" class="d-flex justify-content-between align-items-center">
+      <strong class="d-flex">Payment Status: <p style="font-weight: lighter;margin-left: 10px;">{{ booking.payment_status
+          }}</p></strong>
+      <button class="btn btn-danger" (click)="onCancleTicket(booking._id)"
+        [disabled]="isDateBeforeToday(booking.journeyDate)">Cancel Ticket</button>
+    </div>
+  </li>
+
+</ul>
